@@ -1,6 +1,6 @@
 /**
- * classe qui crée le jeu/Parti
- * un jeu/Parti doit contenir des joueurs un plateau et un dé
+ * classe qui crée le jeu/ la partie
+ * un jeu/Partie doit contenir des joueurs, un plateau et un dé
  */
 package kartel;
 
@@ -46,7 +46,7 @@ public class Partie {
     //fonctions internes
     
     /**
-     * ajoute un joueur avec le nom passé par paramètre
+     * ajoute un joueur avec le nom passé en paramètre
      * @param s 
      */
     private void ajouterJoueur(String s){
@@ -54,19 +54,22 @@ public class Partie {
     }
     
     /**
-     * crée le tableau avec la liste des gangs passée par paramètre
+     * crée le tableau avec la liste des gangs passée en paramètre
      * et un dé avec les faces passés par paramètre
      * @param gansters 
      */
-    private void initPlateau(String [] nomsGangs, int maxPrisoniers){
-        this.plateau = new Plateau(nomsGangs, maxPrisoniers); 
+    //Je pense que c'est pas la peine de passer un dé en paramètres, vue qu'on vas jouer avec un dé spécifique {2, 2, 3, 3, 4, 4}
+    //Et puis je vois que tu as créé un plateau et une prison, non pas un nouveau dé 
+    private void initPlateau(String [] nomsGangs, int maxPrisonniers){
+        this.plateau = new Plateau(nomsGangs, maxPrisonniers); 
     }
            
     /**
-     * crée le tableau avec la liste des gangs passée par paramètre
+     * crée le tableau avec la liste des gangs passée en paramètre
      * et un dé par défaut
      * @param gansters 
      */
+    //Je vois pas ou est le dé par défaut ?
     private void initPlateau(String [] gansters){
         this.plateau = new Plateau(gansters,5);
     }
@@ -95,17 +98,17 @@ public class Partie {
         for (int i = 0; i < 3; i++) 
             ajouterJoueur("Joueur"+i);
         
-        initPlateau(new String[]{"Verts","Blue","Rouge","Cian","Noire","Gris","Magenta"});    
+        initPlateau(new String[]{"Verts","Blue","Rouge","Cyan","Noire","Gris","Magenta"});    
         initDe();
     }
     
     /**
      * méthode en charge de démarrer le jeu
-     * explication détaillée plus tard ...
+     * explication détaillée plus tard ... (..tu m'aide tellement)
      */
     private void jouer(){
         if(this.plateau == null || this.lesJoueurs.getNbJoueurs() == 0 || this.de == null)
-            return;//on peut mettre une exception
+            return;//on peut mettre une exception 
         
         //int opc = 0;
         int resDe, valeurChoisie;
@@ -124,20 +127,18 @@ public class Partie {
             catch(NumberFormatException e) {valeurChoisie =  resDe+1;}
 
             while(valeurChoisie < 0 || valeurChoisie > resDe){
-                System.out.println("La valeur doit etre entre 0 et " + resDe + " insertez une valeur correpte svp");   
+                System.out.println("La valeur doit etre entre 0 et " + resDe + " veuillez saisir une valeur correcte svp !");   
                 try {valeurChoisie = Lire.i();}
                 catch(NumberFormatException e) {valeurChoisie =  resDe+1;}
             }
             
             jetAct = this.plateau.next( valeurChoisie );
             if(jetAct != null){
-                
-            
-            if(!jetAct.getType().equals("boss"))
-                jAct.addRecompense((Recompense)jetAct);
+                if(!jetAct.getType().equals("boss"))
+                    jAct.addRecompense((Recompense)jetAct);
             }
             this.lesJoueurs.nextJoueur();
-            //System.out.println("Continuar? 0 = si : ");
+            //System.out.println("Continuer? 0 = si : ");
             //opc = Lire.i();
             
             
@@ -146,7 +147,7 @@ public class Partie {
         System.out.println("Plateau:");
         System.out.println(this.plateau);
         System.out.println("Resultats:");
-        System.out.println(this.lesJoueurs.imprimerPositions(-1));
+        System.out.println(this.lesJoueurs.afficherPositions(-1));
         
         
     }
