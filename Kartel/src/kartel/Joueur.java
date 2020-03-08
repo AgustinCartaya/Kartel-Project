@@ -1,5 +1,5 @@
 /**
- * Classe qui modelisse les joueurs
+ * Classe qui modélise les joueurs
  * 
  * interfaces implémentées:
  * Comparable
@@ -15,10 +15,10 @@ import java.util.Objects;
  */
 public class Joueur implements Comparable{
 
-    //nom de jugador
+    //nom du joueur
     private String nom;
     
-    //recompensas de jugador
+    //récompenses du joueur
     private ArrayList<Recompense> recompenses;
     
     
