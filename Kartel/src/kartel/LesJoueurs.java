@@ -22,14 +22,13 @@ public class LesJoueurs {
     // Constructeur
     public LesJoueurs() {
         this.joueurs = new ArrayList<Joueur>();
-
     }
     
     
     //fonctions internes
     
     /**
-     * passe au joueur suivant, revien au premier si le précédent était le dernier
+     * passe au joueur suivant, revient au premier si le précédent était le dernier
      */
     public void nextJoueur(){
         
@@ -40,12 +39,14 @@ public class LesJoueurs {
     }
     
     /**
-     * Imprimez les positions des joueurs.
+     * Affichage des positions des joueurs.
      * le nombre de positions est indiqué
      * @param ctt
      * @return 
      */
-    public String imprimerPositions(int ctt){
+    
+    //J'ai pas compris ce que ctt représentes ici
+    public String afficherPositions(int ctt){
         ArrayList<Joueur> resultats =  getListResultats();
         String s="1er lieu:";
         int pos = 1, i = 0;
@@ -117,6 +118,8 @@ public class LesJoueurs {
     
     public ArrayList<Joueur> getListResultats(){
           ArrayList<Joueur> resultats = this.joueurs;
+        
+        //on a jamais vu ca, je sais meme pas ce que ca fait
           Collections.sort(resultats);
           return resultats;
       }
