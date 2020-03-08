@@ -37,41 +37,42 @@ public class Plateau {
         jetons = new ArrayList <Jeton>();
         //Remplissage de la liste des jetons avec tous les jetons des différents gangs 
         
+	//Pas sure qu'on puisse faire ca, on a pas vu cette méthode en cours
         for (int i = 0; i < nomsGangs.length; i++) 
             jetons.addAll(Arrays.asList(  (new Gang( nomsGangs[i], abb[i])).getGang() ));
         
-        //melange liste des jetons
+        //Mélange de la liste des jetons
         melanger(jetons);
         
-        //Creation du detective
+        //Création du detective
         detective =  new Detective (jetons.size()-1);
         
-        //Creation du detective
+        //Création de la prison
         prison = new Prison(maxPrisonniers);
-   
-
     }
 
     
     //fonctions internes
     
     /**
-     * méthode qui avance le détective le nombre de pas passées par paramètre.
-     * élimine et renvoye le jeton de la position où le détective s'est arrêté,
+     * Méthode qui fait avancer le détéctive en fonction du nombe de pas saisi,
+     * supprime et renvoie le jeton de la position où le détective s'est arrêté,
      * s'il est un boss, il entre en prison
      * @param pas
      * @return 
      */
     public Jeton next( int pas ){
-        if(pas ==0)
+        if(pas == 0)
             return null;
-        
+        //On fait avancer le détéctive :
         this.detective.avancer(pas);
         int pos = detective.getPosition()-1;
         
+	//Si le jeton qui se situe à cette position est un boss: on le met en prison
         if(this.jetons.get(pos).getType().equals("boss"))
             this.prison.addBoss((Boss)this.jetons.get(pos));
   
+	
         if(detective.getPosition()>0)
          this.detective.avancer(-1);
         
@@ -83,6 +84,8 @@ public class Plateau {
      * méthode qui mélange les jetons
      * @param list 
      */
+	
+	//Pas vu ca non plus en cours, on devrais peut etre utilise melanger2
     public void melanger(List<Jeton> list) {
 	final long seed = System.nanoTime();
 	Collections.shuffle(list, new Random(seed));
@@ -98,9 +101,7 @@ public class Plateau {
             }while(obj[rdm] != null);
             obj[rdm] = objects[i];
             
-        }
-        
-        
+        } 
         return obj;
     }
     
@@ -109,16 +110,13 @@ public class Plateau {
         String []abb = new String [noms.length];
         
         for (int i = 0; i < noms.length; i++) {
-            
             int trouve = 0;
             for (int j = 0; j < i; j++) 
                 if(abb[j].contains(( noms[i].charAt(0) +"")))
                     trouve++;
               abb[i] = (trouve == 0)?noms[i].charAt(0)+"":noms[i].charAt(0)+""+trouve;
         }
-
-        return abb;
-        
+        return abb;      
     }
     
     
