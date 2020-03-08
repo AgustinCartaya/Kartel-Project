@@ -1,5 +1,5 @@
 /**
- * Classe qui modelisse les Pots De Vin
+ * Classe qui modélise les Pots De Vin
  * 
  * classe parent: Recompense
  */
@@ -10,7 +10,6 @@ package kartel;
  * @author agust
  */
 public class PotDeVin extends Recompense {
-    
 
     //valeur de la recompense
     private int recompense;
@@ -29,7 +28,5 @@ public class PotDeVin extends Recompense {
     @Override
     public String toString() {
         return  '$' + getGang().getAbb();
-    }
-
-    
+    }    
 }
